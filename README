@@ -2,3 +2,16 @@ Author: Praneeth Karempudi
 Email: praneeth.karempudi@icm.uu.se
 
 Instructions for Playing the conway game of life are found here.
+
+
+The game is basically a simulation following a set of rules on a 32x32 size square grid.
+
+Each cell in the grid has two states, either alive or dead. 1 for alive and 0 for dead.
+
+As time evolves, the square grid is updated based on the current state according to following rules.
+-- Any live cell with fewer than two live neighbours dies, as if caused by underpopulation
+-- Any live cell with more than three live neighbours dies, as if by overcrowding
+-- Any live cell with two or three neighbours live on to the next generation
+-- Any dead cell with exactly three live neighbours becomes a live cell
+
+
