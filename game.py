@@ -14,16 +14,19 @@ def initializeCross(sizeOfGrid):
     mat = np.zeros((sizeOfGrid + 2, sizeOfGrid + 2))
     mat[:, int((sizeOfGrid + 2)/2)] = True
     mat[int((sizeOfGrid + 2)/2) , :] = True
+    cleanBoundaries(mat)
 
     return mat
 
 def plotGameState(mat):
     """ Function to call plotting of the game statue using matplot lib """
     plt.figure(100)
-    plt.imshow(mat[1:-1, 1:-1])
+    plt.imshow(mat)
     plt.show()
     time.sleep(1)
+    cleanBoundaries(mat)
     updateGame(mat)
+
     return None
 
 def calculateNeighbours(mat):
@@ -35,8 +38,14 @@ def calculateNeighbours(mat):
 def updateGame(mat):
     mat[1:-1, 1:-1] = calculateNeighbours(mat)
 
+def cleanBoundaries(mat):
+    mat[0, :] = 0
+    mat[-1,:] = 0
+    mat[:, 0] = 0
+    mat[:, -1] = 0
+
 if __name__ == "__main__":
-    board = initializeCross(32)
+    board = initializeCross(33)
     for i in range(100):
         plotGameState(board)
 
