@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import time
 
 def initializeRandom(sizeOfGrid):
     """ Function for randomly initializing a grid of particular size """
@@ -15,11 +16,12 @@ def initializeCross(sizeOfGrid):
 
     return mat
 
-def plotGameState(mat):
+def plotGameState(mat, plotNumber):
     """ Function to call plotting of the game statue using matplot lib """
-    plt.figure()
+    plt.figure(plotNumber)
     plt.imshow(mat[1:-1, 1:-1])
     plt.show()
+    return None
 
 def calculateNeighbours(mat):
     """ Function to calculate the neighbour matrix of the central grid, excluding the border of the grid"""
@@ -29,7 +31,13 @@ def calculateNeighbours(mat):
 
 if __name__ == "__main__":
     board = initializeRandom(32)
-    plotGameState(board)
+    plotGameState(board, 100)
+    time.sleep(5)
+    board[1:-1, 1:-1] = calculateNeighbours(board)
+    plotGameState(board, 100)
+
+    
+
 
     
 
