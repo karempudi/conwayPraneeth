@@ -17,16 +17,19 @@ def initializeCross(sizeOfGrid):
 
     return mat
 
-def plotGameState(mat, plotNumber):
+def plotGameState(mat):
     """ Function to call plotting of the game statue using matplot lib """
-    plt.figure(plotNumber)
+    plt.figure(100)
     plt.imshow(mat[1:-1, 1:-1])
     plt.show()
+    time.sleep(1)
+    updateGame(mat)
     return None
 
 def calculateNeighbours(mat):
     """ Function to calculate the neighbour matrix of the central grid, excluding the border of the grid"""
     N = mat[:-2, :-2] + mat[:-2, 1:-1] + mat[:-2, 2:] + mat[1:-1, :-2] + mat[1:-1, 2:] + mat[2:, :-2] + mat[2:, 1:-1] + mat[2:, 2:]
+    # N is about the size of the visual region
     return (N == 2) | (N == 3)
 
 def updateGame(mat):
@@ -34,9 +37,9 @@ def updateGame(mat):
 
 if __name__ == "__main__":
     board = initializeCross(32)
-    plotGameState(board, 100)
-    updateGame(board)
-    plotGameState(board, 100)
+    for i in range(100):
+        plotGameState(board)
+
 
 
     
