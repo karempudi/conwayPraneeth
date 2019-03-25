@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 import time
 
 def initializeRandom(sizeOfGrid):
@@ -26,15 +27,17 @@ def plotGameState(mat, plotNumber):
 def calculateNeighbours(mat):
     """ Function to calculate the neighbour matrix of the central grid, excluding the border of the grid"""
     N = mat[:-2, :-2] + mat[:-2, 1:-1] + mat[:-2, 2:] + mat[1:-1, :-2] + mat[1:-1, 2:] + mat[2:, :-2] + mat[2:, 1:-1] + mat[2:, 2:]
-    return N
+    return (N == 2) | (N == 3)
 
+def updateGame(mat):
+    mat[1:-1, 1:-1] = calculateNeighbours(mat)
 
 if __name__ == "__main__":
-    board = initializeRandom(32)
+    board = initializeCross(32)
     plotGameState(board, 100)
-    time.sleep(5)
-    board[1:-1, 1:-1] = calculateNeighbours(board)
+    updateGame(board)
     plotGameState(board, 100)
+
 
     
 
