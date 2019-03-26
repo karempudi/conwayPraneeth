@@ -18,14 +18,15 @@ def initializeCross(sizeOfGrid):
 
     return mat
 
-def plotGameState(mat):
-    """ Function to call plotting of the game statue using matplot lib """
-    plt.figure(100)
-    plt.imshow(mat)
+def iterateGameState(mat, numberOfIterations):
+    """ Function to call plotting of the game state using matplot lib """
+    plt.figure("Game")
+    plt.ion()
+    for i in range(numberOfIterations):
+        plt.imshow(mat[1:-1, 1:-1])
+        updateGame(mat)
+        plt.pause(0.01)
     plt.show()
-    time.sleep(1)
-    cleanBoundaries(mat)
-    updateGame(mat)
 
     return None
 
@@ -39,6 +40,7 @@ def updateGame(mat):
     mat[1:-1, 1:-1] = calculateNeighbours(mat)
 
 def cleanBoundaries(mat):
+    """ Setting the boundary of the board to zero after every iteration, incase if we need it"""
     mat[0, :] = 0
     mat[-1,:] = 0
     mat[:, 0] = 0
@@ -46,8 +48,8 @@ def cleanBoundaries(mat):
 
 if __name__ == "__main__":
     board = initializeCross(33)
-    for i in range(100):
-        plotGameState(board)
+    iterateGameState(board, 10)
+
 
 
 
